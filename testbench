@@ -1,0 +1,35 @@
+module celsius_to_fahrenheit_tb;
+
+  logic clk;
+  logic rst;
+  logic [31:0] celsius;
+  logic [31:0] fahrenheit;
+
+  initial begin
+    clk = 0;
+    rst = 1;
+    #5 rst = 0;
+    celsius = 32;
+    #10 celsius = 100;
+    #10 celsius = 0;
+    #10 $stop;
+  end
+
+  always begin
+    #1 clk = ~clk;
+  end
+
+  celsius_to_fahrenheit dut (
+    .clk(clk),
+    .rst(rst),
+    .celsius(celsius),
+    .fahrenheit(fahrenheit)
+  );
+
+  initial begin
+    $display("Celsius\tFahrenheit");
+    $display("-------\t----------");
+    $monitor("%d\t%d", celsius, fahrenheit);
+  end
+
+endmodule
