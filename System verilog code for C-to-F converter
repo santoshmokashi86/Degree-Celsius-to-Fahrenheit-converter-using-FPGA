@@ -1,0 +1,15 @@
+module celsius_to_fahrenheit (
+  input logic clk,
+  input logic rst,
+  input logic [31:0] celsius,
+  output logic [31:0] fahrenheit
+);
+
+  always_ff @(posedge clk) begin
+    if (rst) begin
+      fahrenheit <= 0;
+    end else begin
+      fahrenheit <= (celsius * 9/5) + 32;
+    end
+  end
+endmodule
